@@ -11,6 +11,8 @@ written in Kestrel itself.
 | `math` | abs/sign/min/max/clamp (generic), gcd/lcm, pow_int, floor/ceil/round, sqrt (Newton's method), pi/e/tau | **Implemented + tested** |
 | `collections` | List helpers: range, sum/min/max, count, concat, slice | **Implemented + tested** |
 | `io` | read_lines / write_lines / append_file over the file built-ins | **Implemented + tested** |
+| `testing` | A tiny unit-test framework: expect / expect_eq_* / report | **Implemented + tested** |
+| `os` | Process + argv helpers: run / run_ok / argc / arg_at / args / has_flag | **Implemented + tested** |
 | `kernel` | Linux kernel-module FFI bindings (printk, uaccess, chrdev, errno) | Designed |
 
 Every implemented module has a sibling test program (`<mod>/test_<mod>.kst`)
@@ -18,16 +20,21 @@ that exercises each function and prints a PASS/FAIL summary.
 
 ## Running the tests
 
-Each test is a standalone program; run it with the Kestrel compiler:
+Each test is a standalone program; run it with the Kestrel compiler. The
+tests import each other across modules (e.g. `os` uses `testing`), so point
+`KESTREL_STD` at this checkout so `import std.*` resolves:
 
 ```bash
+export KESTREL_STD=$(pwd)
 kestrel run string/test_string.kst
 kestrel run math/test_math.kst
 kestrel run collections/test_collections.kst
 kestrel run io/test_io.kst
+kestrel run testing/test_testing.kst
+kestrel run os/test_os.kst
 ```
 
-All four print `PASS` on a green tree.
+All of them print `PASS` on a green tree.
 
 ## A taste
 
