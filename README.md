@@ -13,6 +13,8 @@ written in Kestrel itself.
 | `io` | read_lines / write_lines / append_file over the file built-ins | **Implemented + tested** |
 | `testing` | A tiny unit-test framework: expect / expect_eq_* / report | **Implemented + tested** |
 | `os` | Process + argv helpers: run / run_ok / argc / arg_at / args / has_flag | **Implemented + tested** |
+| `convert` | Primitive ↔ string: int/int64/float/bool_to_str, parse_int, is_int | **Implemented + tested** |
+| `assert` | Runtime assertions built on `fail`: assert / assert_eq_* / unreachable | **Implemented + tested** |
 | `kernel` | Linux kernel-module FFI bindings (printk, uaccess, chrdev, errno) | Designed |
 
 Every implemented module has a sibling test program (`<mod>/test_<mod>.kst`)
@@ -32,6 +34,8 @@ kestrel run collections/test_collections.kst
 kestrel run io/test_io.kst
 kestrel run testing/test_testing.kst
 kestrel run os/test_os.kst
+kestrel run convert/test_convert.kst
+kestrel run assert/test_assert.kst
 ```
 
 All of them print `PASS` on a green tree.
